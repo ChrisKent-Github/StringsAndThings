@@ -1,9 +1,13 @@
 package io.zipcoder;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author tariq
  */
+
+
 public class StringsAndThings {
 
     /**
@@ -14,9 +18,26 @@ public class StringsAndThings {
      *           countYZ("day fez"); // Should return 2
      *           countYZ("day fyyyz"); // Should return 2
      */
-    public Integer countYZ(String input){
-        return null;
-    }
+
+
+    public static Integer countYZ(String input) {
+        int arrIndex = 0;
+        int numOfXy = 0;
+        ArrayList<Character> arr2Char = new ArrayList<Character>();
+        for (char c : input.toCharArray()) {
+            arr2Char.add(c);
+        }
+        arr2Char.add(' ');
+        for (int p: arr2Char) {
+            if (arr2Char.get(arrIndex) == ' ') {
+                if (arr2Char.get(arrIndex - 1) == 'y' || arr2Char.get(arrIndex -1) == 'z') {
+                    numOfXy++;
+                }
+            }
+            arrIndex++;
+        }
+//        System.out.println(numOfXy);
+    return numOfXy;}
 
     /**
      * Given two strings, base and remove, return a version of the base string where all instances of the remove string have
@@ -28,8 +49,37 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        return null;
-    }
+//        ArrayList<String> strPieces = new ArrayList<String>();
+//        int remIndex = -1;
+//        String result = "";
+//        if(base.contains(remove)) {
+//            for (int i = 0; i < base.length(); i++) {
+//                if (i < 1) {
+//                    remIndex = base.indexOf(remove, i);
+//                    strPieces.add(base.substring(0, i));
+//                    i += (remIndex + remove.length());
+//                }
+//                else {
+//                    remIndex = base.indexOf(remove, i);
+//                    strPieces.add(base.substring(i,remIndex));
+//                    i += (remIndex + remove.length());
+//                }
+//            }
+//            result = String.join("", strPieces);
+//         }
+//        else {
+//            result = base;
+//        }
+        String result = base;
+        while (result.contains(remove)){
+            result = result.replaceFirst(remove, "");
+        }
+        System.out.println(result);
+        return result;
+        }
+
+
+
 
     /**
      * Given a string, return true if the number of appearances of "is" anywhere in the string is equal
@@ -40,7 +90,27 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+        boolean result = false;
+        char[] toLet = input.toCharArray();
+        int isCount = 0;
+        int notCount = 0;
+        for(int i = 0; i < input.length() - 1; i++){
+                if (toLet[i] <= toLet[toLet.length - 1] && toLet[i] == 'i' && toLet[i + 1] == 's') {
+                    isCount++;
+                    i++;
+                }
+                if(toLet[i] <= toLet[toLet.length - 2] && toLet[i] == 'n' && toLet[i + 1] == 'o' && toLet[i + 2] == 't'){
+                    notCount++;
+                    i += 2;
+                }
+
+        }
+        if(isCount == notCount){
+            result = true;
+        }
+        System.out.println("is:"+isCount);
+        System.out.println("not:"+notCount);
+        return result;
     }
 
     /**
@@ -48,10 +118,24 @@ public class StringsAndThings {
      * Return true if all the g's in the given string are happy.
      * example : gHappy("xxggxx") // Should return  true
      *           gHappy("xxgxx") // Should return  false
-     *           gHappy("xxggyygxx") // Should return  false
+     *           gHappy("xxggyygxx") // Should return false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        boolean result = false;
+        char[] toLetters = input.toCharArray();
+        for(int i = 0; i < input.length() - 1; i++){
+            if(toLetters[i] == 'g'){
+                if(toLetters[i] == toLetters[i + 1]){
+                    result = true;
+                    i++;
+                }
+                else{
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
 
@@ -63,6 +147,27 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        int tripleChk = 0;
+        int doubleCount = 0;
+        char[] toLetters = input.toLowerCase().toCharArray();
+        for(int i = 0; i < input.length() - 2; i++){
+        if(toLetters[i] == toLetters[i + 1] && doubleCount < 1){
+            doubleCount++;
+            }
+        else if(toLetters[i] == toLetters[i + 1] && doubleCount > 0){
+            tripleChk++;
+            if(toLetters[i] != toLetters[i + 2])
+            doubleCount = 0;
+            }
+        }
+        return tripleChk;
+    }
+
+    public static void main(String[] args){
+        String removeString;
     }
 }
+
+
+
+
